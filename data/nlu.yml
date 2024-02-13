@@ -1,0 +1,118 @@
+version: "3.1"
+nlu:
+- intent: saludo
+  examples: |
+    - hey
+    - hola
+    - hola, ¿qué tal?
+    - hey, hola
+    - buenos días
+    - buenas tardes
+    - buenas noches
+    - buenas
+    - Hola!
+    - holita
+- intent: respuesta_edad
+  examples: |
+    - tengo [19](edad)
+    - tengo [39](edad) años
+    - yo tengo [10](edad) años
+    - mi edad es [25](edad) años
+    - Mi edad es de [50](edad) años
+    - Yo tengo [67](edad) años
+    - [25](edad)
+    - [40](edad)
+    - tengo [5](edad) añitos
+    - mi edad es [34](edad)
+    - tengo [56](edad) años
+- intent: despedida
+  examples: |
+    - adiós
+    - hasta luego
+    - pasa un buen día
+    - nos vemos luego
+    - nos vemos más tarde
+    - hablamos luego
+    - nos vemos
+    - vale, adiós
+    - de acuerdo, hasta luego
+    - gracias, adiós
+    - de acuerdo, adiós
+    - vale, gracias, hasta luego
+    - bien, gracias
+- intent: afirmacion
+  examples: |
+    - si
+    - sí
+    - eso es
+    - afirmativo
+    - claro
+    - vale
+    - así es
+    - ok
+- intent: negacion
+  examples: |
+    - no
+    - nop
+    - nope
+    - No
+    - no realmente
+    - nada más
+    - negativo
+    - no gracias
+- intent: Cervezas
+  examples: |
+    - Muestrame todas las cervezas
+    - Quiero ver todas las cervezas
+    - enseñame todas las cervezas
+    - quiero ver todas las cervezas
+    - dame todas las cervezas
+    - dame todas las cervezas que tienes en stock
+    - qué cervezas tienes?
+- intent: paises
+  examples: |
+    - ¿De qué país es la cerveza [lager](tipo)?
+    - ¿De qué país es la cerveza [ale](tipo)?
+    - ¿De qué país es la cerveza [stout](tipo)?
+    - ¿De qué país es la cerveza [pilsner](tipo)?
+    - ¿De qué país es la cerveza [pale ale](tipo)?
+    - ¿De qué país es la cerveza [weissbier](tipo)?
+    - ¿De qué país es la cerveza [trappist](tipo)?
+    - ¿De qué país es la cerveza [dubbel](tipo)?
+    - ¿De qué país es la cerveza [tripel](tipo)?
+    - ¿De qué país es la cerveza [quadrupel](tipo)?
+    - dime el origen de la cerveza [trappist](tipo)
+- intent: categorias
+  examples: |
+    - De que tipo es la cerveza [ipa](tipo)
+    - ¿Qué tipo de cerveza es [lager](tipo)?
+    - Me gustaria saber de que tipo es la cerveza [ale](tipo)
+    - ¿Puedes decirme que es la cerveza [scotch ale](tipo)?
+    - Quiero saber de que tipo es la [brown ale](tipo)?
+    - Dime de que es la cerveza [amber ale](tipo)?
+- intent: grado_alcohol
+  examples: |
+    - Dime el grado de alcohol de la cerveza [ipa](tipo)
+    - Quiero saber la graduación que tiene la [lager](tipo)
+    - Me gustaria saber la graduación que tiene la cerveza [ale](tipo)
+    - Cuanta graduación tiene la cerveza [stout](tipo)
+    - Necesito saber cuantos grados tiene la cerveza [pilsner](tipo)
+    - Quisiera saber la graduación de la [pale ale](tipo)
+    - ¿Puedes decirme cuantos grados tiene la cerveza [weissbier](tipo)?
+    - Quiero qe me digas la graduación que tiene la cerveza [trappist](tipo)
+- intent: precios
+  examples: |
+    - dime el precio de la cerveza [alemana](pais)
+    - cuanto cuesta una cerveza [pilsner](tipo)
+    - cual es el precio de la cerveza [dubbel](tipo)?
+- intent: out_of_scope
+  examples: |
+    - fadfasldkfjalkdjfaksjdfa
+    - ajsjfjjfjfjaljs
+    - ejejejeje
+    - kjlfalkafsdjlkjañ
+    - te casas conmigo guapeton?
+    - sal conmigo por favor
+    - quiere pal de chicle
+    - como tan muchacho
+    - turututu

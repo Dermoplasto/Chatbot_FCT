@@ -1,0 +1,37 @@
+<html>
+    <body>
+        <style>
+            .rw-conversation-container .rw-header{background-color:rgb(196, 133, 18);}
+            .rw-conversation-container .rw-messages-container .rw-message .rw-response{background-color:rgb(196, 180, 113);}
+            .rw-conversation-container .rw-messages-container .rw-message .rw-client{background-color: rgb(196, 133, 18);}
+            .rw-launcher{background-color: rgb(196, 133, 18);}
+            .rw-conversation-container .rw-messages-container .rw-replies .rw-reply{background-color:rgb(196, 133, 18);}            
+            .rw-conversation-container .rw-messages-container .rw-replies .rw-response{background-color:rgb(196, 133, 18);}
+        </style>
+        <script>!(function () {
+            let e = document.createElement("script"),
+            t = document.head || document.getElementsByTagName("head")[0];
+            (e.src = 
+                "https://cdn.jsdelivr.net/npm/rasa-webchat@1.0.1/lib/index.js"),
+                (e.async = !0),
+                (e.onload = () => {
+                    window.WebChat.default(
+                        {
+                            initPayload: "/saludar",
+                            customData: {language: "es"},
+                            socketUrl: "http://localhost:5005",
+                            socketPath: "/socket.io/",
+                            title: "CerveBot",
+                            subtitle: "El chatbot más cervecero",
+                            storage: "session",
+                            inputTextFieldHint: "Escribe un mensaje...",
+                            embedded: false
+                        },
+                        null
+                    );
+                }),
+                t.insertBefore(e, t.firstChild);
+        })();
+        </script>
+    </body>
+</html>

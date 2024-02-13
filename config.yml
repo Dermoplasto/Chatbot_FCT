@@ -1,0 +1,53 @@
+# Configuration for Rasa NLU.
+# https://rasa.com/docs/rasa/nlu/components/
+language: "es"
+
+pipeline:
+#   - name: "SpacyNLP"
+#     model: "es_core_news_sm"
+#   - name: "SpacyEntityExtractor"
+#     dimensions: ["LOC"]
+
+- name: "WhitespaceTokenizer"
+# RegexFeaturizer y RegexEntityExtractor son necesarios para las regular expressions (email)
+#- name: "RegexFeaturizer"
+#- name: "RegexEntityExtractor"
+#  use_lookup_tables: false
+#   - name: "SpacyTokenizer"   
+# CRFEntityExtractor es necesario para los lookups   
+- name: "CRFEntityExtractor"
+  BILOU_flag: false
+# EntitySynonymMapper es necesario para los sinónimos
+- name: "EntitySynonymMapper"
+#   - name: "SpacyFeaturizer"
+- name: "LexicalSyntacticFeaturizer"
+#- name: "CountVectorsFeaturizer"
+- name: "CountVectorsFeaturizer"
+  analyzer: "char_wb"
+  min_ngram: 1
+  max_ngram: 4
+#   - name: "ResponseSelector"
+#     epochs: 100
+- name: "DIETClassifier"
+  entity_recognition: true
+  epochs: 100
+  constrain_similarities: true
+  model_confidence: softmax
+- name: FallbackClassifier
+  threshold: 0.7
+  ambiguity_threshold: 0.2
+
+# Configuration for Rasa Core.
+# https://rasa.com/docs/rasa/core/policies/
+policies:
+# # No configuration for policies was provided. The following default policies were used to train your model.
+# # If you'd like to customize them, uncomment and adjust the policies.
+# # See https://rasa.com/docs/rasa/policies for more information.
+- name: MemoizationPolicy
+- name: TEDPolicy
+  max_history: 5
+  epochs: 100
+  constrain_similarities: true
+  model_confidence: softmax
+- name: RulePolicy
+assistant_id: 20240213-191750-legato-image

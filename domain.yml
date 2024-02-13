@@ -1,0 +1,56 @@
+version: '3.1'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- Cervezas
+- afirmacion
+- categorias
+- despedida
+- grado_alcohol
+- negacion
+- out_of_scope
+- paises
+- precios
+- respuesta_edad
+- saludo
+entities:
+- edad
+- tipo
+- pais
+slots:
+  edad:
+    type: list
+    mappings:
+    - type: from_entity
+      entity: edad
+  pais:
+    type: list
+    mappings:
+    - type: from_entity
+      entity: pais
+  tipo:
+    type: list
+    mappings:
+    - type: from_entity
+      entity: tipo
+responses:
+  utter_saludo:
+  - text: ¡Hola! Soy CerveBot, tu asistente de cervezas personal :)
+  utter_ask_edad:
+  - text: Antes de empezar necesito saber qué edad tienes
+  utter_despedida:
+  - text: ¡Hasta luego! No dudes en volver :)
+  - text: Adiós :( Nos vemos en la próxima
+  utter_no_entiendo:
+  - text: No entiendo lo que me quieres decir, ¿puedes repetirlo, por favor?
+  utter_otra_pregunta:
+  - text: ¿Tienes alguna otra pregunta?
+actions:
+- action_edad
+- action_cervezas
+- utter_ask_edad
+- utter_saludo
+- utter_despedida
+- utter_otra_pregunta
+- utter_no_entiendo

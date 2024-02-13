@@ -1,0 +1,123 @@
+version: "3.1"
+stories:
+
+- story: Pregunta Out of scope
+  steps: 
+  - intent: out_of_scope
+  - action: utter_no_entiendo
+   
+
+- story: Saludo y edad
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - action: utter_ask_edad
+  - intent: respuesta_edad
+  - intent: respuesta_edad
+    entities:
+    - edad: '25'
+  - slot_was_set:
+    - edad:
+      - '25'  
+  - action: action_edad
+
+- story: Consulta categoria
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - action: utter_ask_edad
+  - intent: respuesta_edad
+    entities:
+    - edad: '25'
+  - slot_was_set:
+    - edad:
+      - '25'
+  - action: action_edad
+  - intent: categorias
+    entities:
+    - pais: irlandesa
+  - slot_was_set:
+    - pais:
+      - irlandesa
+  - action: utter_otra_pregunta    
+
+- story: Consulta grado alcohol
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - action: utter_ask_edad
+  - intent: respuesta_edad
+    entities:
+    - edad: '45'
+  - slot_was_set:
+    - edad:
+      - '45'
+  - action: action_edad
+  - intent: grado_alcohol
+    entities:
+    - tipo: trappist
+  - slot_was_set:
+    - tipo:
+      - trappist
+  - action: utter_otra_pregunta
+  - intent: negacion
+  - action: utter_despedida
+
+- story: Consulta pais cerveza
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - action: utter_ask_edad
+  - intent: respuesta_edad
+    entities:
+    - edad: '35'
+  - slot_was_set:
+    - edad:
+      - '35'
+  - action: action_edad
+  - intent: paises
+    entities:
+    - tipo: trappist
+  - slot_was_set:
+    - tipo:
+      - trappist
+  - action: utter_otra_pregunta
+  - intent: negacion
+  - action: utter_despedida  
+
+- story: Consulta precios
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - action: utter_ask_edad
+  - intent: respuesta_edad
+    entities:
+    - edad: '34'
+  - slot_was_set:
+    - edad:
+      - '34'
+  - action: action_edad
+  - intent: precios
+    entities:
+    - tipo: dubbel
+  - slot_was_set:
+    - tipo:
+      - dubbel
+  - action: utter_otra_pregunta
+  - intent: negacion
+  - action: utter_despedida
+
+- story: Consulta cervezas
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - action: utter_ask_edad
+  - intent: respuesta_edad
+    entities:
+    - edad: '56'
+  - slot_was_set:
+    - edad:
+      - '56'
+  - action: action_edad
+  - intent: Cervezas
+  - action: action_cervezas

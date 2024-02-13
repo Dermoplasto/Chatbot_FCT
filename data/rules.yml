@@ -1,0 +1,24 @@
+version: "3.1"
+
+rules:
+
+- rule: Saludar cuando el usuario salude.
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - action: utter_ask_edad
+
+- rule: Decir adiós cuando el usuario diga adiós.
+  steps:
+  - intent: despedida
+  - action: utter_despedida
+
+- rule: Decir que no entiende la frase 
+  steps:
+  - intent: nlu_fallback
+  - action: utter_no_entiendo
+
+- rule: Decir que no entiende la frase cuando sea out of scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_no_entiendo     
