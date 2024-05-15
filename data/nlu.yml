@@ -40,6 +40,7 @@ nlu:
     - de acuerdo, adiós
     - vale, gracias, hasta luego
     - bien, gracias
+    - adiooos
 - intent: afirmacion
   examples: |
     - si
@@ -62,8 +63,8 @@ nlu:
     - no gracias
 - intent: Cervezas
   examples: |
-    - Muestrame todas las cervezas
-    - Quiero ver todas las cervezas
+    - Muestrame todas las cervezas de [Bélgica](pais)
+    - Quiero ver todas las cervezas de [Alemania](pais)
     - enseñame todas las cervezas
     - quiero ver todas las cervezas
     - dame todas las cervezas
@@ -116,3 +117,4 @@ nlu:
     - quiere pal de chicle
     - como tan muchacho
     - turututu
+    - alcoholizame

@@ -6,7 +6,7 @@ rules:
   steps:
   - intent: saludo
   - action: utter_saludo
-  - action: utter_ask_edad
+  - action: action_ask_mayor_edad
 
 - rule: Decir adiós cuando el usuario diga adiós.
   steps:
@@ -21,4 +21,18 @@ rules:
 - rule: Decir que no entiende la frase cuando sea out of scope
   steps:
   - intent: out_of_scope
-  - action: utter_no_entiendo     
+  - action: utter_no_entiendo   
+
+- rule: Acceso cuando es mayor de edad
+  steps:
+  - action: action_ask_mayor_edad
+  - intent: afirmacion
+  - action: utter_mayor_edad
+  - active_loop: utter_mayor_edad  
+
+- rule: Acceso cuando es menor de edad
+  steps:
+  - action: action_ask_mayor_edad
+  - intent: negacion
+  - action: utter_menor_edad
+  - action: utter_despedida  
