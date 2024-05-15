@@ -17,25 +17,28 @@ from actions.validaciones import *
 class ActionEdad(Action):
     """Acción que según la edad deja entrar o no"""
     def name(self) -> Text:
-        return "action_edad"
-        
-    def run(self, dispatcher, tracker, domain):
-        edad_slot = tracker.get_slot('edad') 
-        response = ""
-        for e in edad_slot:  
-            edad = int(e)  
-            if edad >= 18:				
-                response = """¡Genial! Pregúntame lo que quieras saber."""						
-            else:
-                response = """Lo siento, eres menor de edad y no puedo contestarte. ¡Hasta luego!"""    			
-        dispatcher.utter_message(response)
-        return []
+        return "action_ask_mayor_edad"
+    
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+		
+        respuesta = "¿Eres mayor de edad?"
+        buttons = []
+        buttons.append({'title': 'Sí', 'payload': 'si'})
+        buttons.append({'title': 'No', 'payload': 'no'})
+        dispatcher.utter_message(respuesta,buttons=buttons)
 
+        return []
 
 class ActionResetSlots(Action):
 	"""Acción para resetear los slots"""
 	def name(self) -> Text:
 		return "action_resetear"
+	
 	def run(self, dispatcher: CollectingDispatcher,
 			tracker: Tracker,
 			domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
@@ -48,7 +51,7 @@ class ActionResetSlots(Action):
 
 
 class ActionMostrarCervezas(Action):
-    """Mostramos los edificios disponibles"""
+    """Mostramos todas las cervezas"""
 
     def name(self) -> Text:
         return "action_cervezas"
@@ -60,13 +63,53 @@ class ActionMostrarCervezas(Action):
         domain: Dict[Text, Any]
     ) -> List[Dict[Text, Any]]:
         
-        cervezas = consultar_cervezas(tipo=None, pais=None)
+        pais = tracker.get_slot('pais')
+        cervezas = consultar_cervezas(pais=pais)
 
         dispatcher.utter_message("Las cervezas de las que disponemos son las siguientes:")
         for cerveza in cervezas:
             return(cerveza)
 
         return []
+    
+
+class ActionAskFallback(Action):
+	def name(self):
+		return "action_ask_fallback"
+	def run(self,dispatcher,tracker,domain):
+		# Obtenemos todos los intents con su confianza
+		ranking = tracker.latest_message['intent_ranking']
+		# Valor mínimo de confianza
+		min_confidence = 0.1
+		# Seleccionamos sólo los nombres de los elementos con una 
+		# confianza superior al valor mínimo 
+		nombres = [intent['name'] for intent in ranking 
+			if (intent['confidence'] > min_confidence 
+				and intent['name'] != 'nlu_fallback')]
+		# Inicializamos la lista de botones a devolver
+		buttons = []
+		# Si la lista está vacía, de verdad no tenemos ni idea de 
+		# qué han dicho
+		if not nombres:
+			dispatcher.utter_message(
+				"No te he entendido. ¿Podrías reformular la pregunta?"
+			)
+		else:
+			# Si sólo hay un nombre, mejor preguntas de si/no
+			if len(nombres) == 1:
+				buttons.append({'title': 'Sí', 'payload': '/'+nombres[0]})
+				buttons.append({'title': 'No', 'payload': 'no'})
+				respuesta = "¿Lo que quieres hacer es "+nombres[0]+"?"
+				dispatcher.utter_message(respuesta, buttons=buttons)
+
+			# Poblamos la lista de botones a devolver
+			else:
+				for nombre in nombres:
+					buttons.append({'title': nombre, 'payload': '/'+nombre})
+				dispatcher.utter_message(
+					"Creo que quieres una de estas cosas", buttons=buttons
+				)
+		return[]	
 
 '''     
 

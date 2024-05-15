@@ -10,6 +10,13 @@ def crear_conexion():
 
 	return conexion
 
+
+def consultar_cervezas(pais):
+    sentencia = 'SELECT DISTINCT CATEGORIA FROM CERVEZAS WHERE PAIS_ORIGEN = "'+"{}".format(pais)+'" '
+	
+    return ejecutar_sentencia(sentencia)
+
+
 def ejecutar_sentencia(sentencia):
 	conexion = crear_conexion()
 
@@ -27,12 +34,6 @@ def ejecutar_sentencia(sentencia):
 	conexion.close()
 	
 	return filas_retorno
-
-
-def consultar_cervezas(tipo = None, pais = None):
-    sentencia = 'SELECT DISTINCT * FROM CERVEZAS'
-	
-    return ejecutar_sentencia(sentencia)
 
 
 '''
