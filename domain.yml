@@ -37,8 +37,6 @@ slots:
 responses:
   utter_saludo:
   - text: ¡Hola! Soy CerveBot, tu asistente de cervezas personal :)
-  utter_ask_edad:
-  - text: Antes de empezar necesito saber qué edad tienes
   utter_despedida:
   - text: ¡Hasta luego! No dudes en volver :)
   - text: Adiós :( Nos vemos en la próxima
@@ -46,11 +44,18 @@ responses:
   - text: No entiendo lo que me quieres decir, ¿puedes repetirlo, por favor?
   utter_otra_pregunta:
   - text: ¿Tienes alguna otra pregunta?
+  utter_mayor_edad:
+  - text: ¡Genial! Pregúntame lo que quieras saber.
+  utter_menor_edad:
+  - text: Lo siento, eres menor de edad y no puedo contestarte.
 actions:
-- action_edad
-- action_cervezas
-- utter_ask_edad
-- utter_saludo
 - utter_despedida
+- action_ask_mayor_edad
+- utter_saludo
+- action_cervezas
+- action_resetear
+- action_ask_fallback
 - utter_otra_pregunta
 - utter_no_entiendo
+- utter_menor_edad
+- utter_mayor_edad
